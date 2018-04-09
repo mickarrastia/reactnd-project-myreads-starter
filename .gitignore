@@ -1,3 +1,8 @@
-node_modules
+#Application
+server-results/
+node_modules/
 yarn.lock
 .DS_Store
+
+#IntelliJ
+.idea/
