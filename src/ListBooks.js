@@ -9,11 +9,12 @@ import BookShelf from './BookShelf'
 class ListBooks extends Component {
   static propTypes = {
     shelves: PropTypes.array.isRequired,
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    onShelfChange: PropTypes.func.isRequired
   }
 
   render() {
-    const {books, shelves} = this.props
+    const {books, shelves, onShelfChange} = this.props
     return (
       <div className='list-books'>
         <div className='list-books-title'>
@@ -21,7 +22,7 @@ class ListBooks extends Component {
         </div>
         <div className='list-books-content'>
           {shelves.map((shelf) => (
-            <BookShelf key={shelf.name} name={shelf.name} type={shelf.type} books={books}/>
+            <BookShelf key={shelf.name} name={shelf.name} type={shelf.type} books={books} onShelfChange={onShelfChange}/>
           ))}
         </div>
         <div className='open-search'>
