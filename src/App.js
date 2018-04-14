@@ -6,9 +6,16 @@ import ListBooks from './ListBooks'
 import SearchBooks from './SearchBooks'
 import * as BooksAPI from './BooksAPI'
 
+/**
+ * An application to manage book reading activity.
+ */
 class BooksApp extends React.Component {
 
   state = {
+    shelves: [
+      {'name': 'Currently Reading', 'type': 'currentlyReading'},
+      {'name': 'Want to Read', 'type': 'wantToRead'},
+      {'name': 'Read', 'type': 'read'}],
     books: []
   }
 
@@ -24,9 +31,10 @@ class BooksApp extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className='app'>
         <Route exact path='/' render={() => (
           <ListBooks
+            shelves={this.state.shelves}
             books={this.state.books}
           />
         )}
