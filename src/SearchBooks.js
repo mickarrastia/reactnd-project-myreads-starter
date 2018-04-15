@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import Book from './Book'
+import debounce from 'lodash.debounce'
 
 class SearchBooks extends Component {
   static propTypes = {
@@ -17,10 +18,15 @@ class SearchBooks extends Component {
 
   updateQuery = (query) => {
     this.setState(() => ({
-        query: query
+        query: query,
+        searchedBooks: []
       }
     ))
-    if (query !== '') {
+    this.runSearch(query)
+  }
+
+  runSearch = debounce((query) => {
+    if (query && query !== '') {
       BooksAPI.search(query).then(
         (books) => {
           this.setState(() => ({
@@ -33,7 +39,7 @@ class SearchBooks extends Component {
         }))
       })
     }
-  }
+  }, 500)
 
   render() {
     const {onShelfChange, getBookShelf} = this.props
