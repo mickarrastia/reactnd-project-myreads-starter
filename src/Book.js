@@ -8,16 +8,20 @@ import ShelfChanger from "./ShelfChanger";
 class Book extends Component {
   static propTypes = {
     book: PropTypes.object.isRequired,
-    onShelfChange: PropTypes.func.isRequired
+    onShelfChange: PropTypes.func.isRequired,
+    getBookShelf: PropTypes.func
   }
 
   render() {
-    const {book, onShelfChange} = this.props
+    const {book, onShelfChange, getBookShelf} = this.props
+    if(book.shelf === undefined) {
+      book['shelf'] = getBookShelf(book)
+    }
     return (
       <div className='book'>
         <div className='book-top'>
           <div className='book-cover'
-               style={{width: 128, height: 192, backgroundImage: `url(${book.imageLinks.thumbnail})`}}>
+               style={{width: 128, height: 192, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail})`}}>
           </div>
           <ShelfChanger book={book} onShelfChange={onShelfChange}/>
         </div>
