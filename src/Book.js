@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ShelfChanger from "./ShelfChanger";
+import ShelfChanger from './ShelfChanger'
 
 /**
  * Renders basic book details such as cover, title and authors.
